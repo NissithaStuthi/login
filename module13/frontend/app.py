@@ -6,71 +6,61 @@ import plotly.express as px
 
 
 # ============================================================
-# PAGE CONFIGURATION
+# PAGE CONFIG
 # ============================================================
 
 st.set_page_config(
     page_title="ResolveIQ",
     page_icon="",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="collapsed"
 )
 
 
 # ============================================================
-# CONFIGURATION
+# API CONFIGURATION
 # ============================================================
 
 API_URL = "https://login-j0hk.onrender.com"
 
 
 # ============================================================
-# GLOBAL STYLE
+# CUSTOM CSS
 # ============================================================
 
 st.markdown(
     """
     <style>
 
-    /* ========================================================
-       HIDE STREAMLIT DEFAULT HEADER / TOOLBAR
-       ======================================================== */
-
+    /* Hide Streamlit header */
     header[data-testid="stHeader"] {
         display: none !important;
     }
 
+    /* Hide toolbar */
     [data-testid="stToolbar"] {
         display: none !important;
     }
 
+    /* Hide decoration */
     [data-testid="stDecoration"] {
         display: none !important;
     }
 
-    /* Remove top white space */
+    /* Main page */
     .block-container {
-        max-width: 1180px;
-        padding-top: 18px !important;
+        max-width: 1200px;
+        padding-top: 20px !important;
         padding-bottom: 50px !important;
     }
 
-
-    /* ========================================================
-       PAGE
-       ======================================================== */
-
     .stApp {
-        background: #f7f5f0;
+        background-color: #f7f5f0;
     }
 
-
-    /* ========================================================
-       HEADER
-       ======================================================== */
-
+    /* ResolveIQ logo */
     .brand {
-        font-size: 38px;
+        font-size: 40px;
         font-weight: 800;
         color: #173f3a;
         letter-spacing: -1.5px;
@@ -78,72 +68,60 @@ st.markdown(
     }
 
     .tagline {
-        color: #727b78;
+        color: #747d7a;
         font-size: 14px;
-        margin-top: 2px;
+        margin-top: 4px;
     }
 
+    /* Online status */
     .online {
-        background: #e7f4ee;
+        background-color: #e7f4ee;
         color: #28735f;
         padding: 7px 13px;
         border-radius: 20px;
         font-size: 12px;
         font-weight: 700;
-        display: inline-block;
     }
 
-
-    /* ========================================================
-       TITLES
-       ======================================================== */
-
+    /* Page headings */
     .page-title {
         color: #173f3a;
-        font-size: 31px;
+        font-size: 30px;
         font-weight: 800;
         margin-top: 25px;
-        margin-bottom: 4px;
+        margin-bottom: 5px;
     }
 
     .page-description {
         color: #747d7a;
         font-size: 15px;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
     }
 
-
-    /* ========================================================
-       CARDS
-       ======================================================== */
-
+    /* Cards */
     .card {
-        background: white;
+        background-color: white;
         border: 1px solid #e8e5de;
         border-radius: 15px;
         padding: 20px;
-        box-shadow: 0 4px 16px rgba(30, 45, 40, 0.04);
         margin-bottom: 18px;
+        box-shadow: 0 4px 16px rgba(30, 45, 40, 0.04);
     }
 
     .card-title {
         color: #173f3a;
         font-size: 17px;
         font-weight: 750;
-        margin-bottom: 13px;
+        margin-bottom: 14px;
     }
 
-
-    /* ========================================================
-       METRICS
-       ======================================================== */
-
+    /* Metric cards */
     .metric {
-        background: white;
+        background-color: white;
         border: 1px solid #e8e5de;
         border-radius: 15px;
         padding: 18px;
-        min-height: 105px;
+        min-height: 100px;
         box-shadow: 0 4px 16px rgba(30, 45, 40, 0.04);
     }
 
@@ -155,17 +133,13 @@ st.markdown(
 
     .metric-value {
         color: #173f3a;
-        font-size: 27px;
+        font-size: 26px;
         font-weight: 800;
     }
 
-
-    /* ========================================================
-       RESULT BOXES
-       ======================================================== */
-
+    /* Result boxes */
     .result-box {
-        background: #f1f7f4;
+        background-color: #f1f7f4;
         border: 1px solid #dbeae4;
         border-radius: 13px;
         padding: 18px;
@@ -174,7 +148,7 @@ st.markdown(
     }
 
     .resolution-box {
-        background: #faf8f3;
+        background-color: #faf8f3;
         border: 1px solid #e9e3d8;
         border-radius: 13px;
         padding: 18px;
@@ -182,43 +156,12 @@ st.markdown(
         color: #3f4946;
     }
 
-
-    /* ========================================================
-       PRIORITY
-       ======================================================== */
-
-    .priority-high {
-        background: #fff3df;
-        color: #9b6200;
-        padding: 6px 11px;
-        border-radius: 8px;
-        font-weight: 700;
-        display: inline-block;
-    }
-
-    .priority-critical {
-        background: #ffe7e7;
-        color: #a12d2d;
-        padding: 6px 11px;
-        border-radius: 8px;
-        font-weight: 700;
-        display: inline-block;
-    }
-
-
-    /* ========================================================
-       TABS
-       ======================================================== */
-
+    /* Tabs */
     button[data-baseweb="tab"] {
         font-weight: 600;
     }
 
-
-    /* ========================================================
-       FOOTER
-       ======================================================== */
-
+    /* Footer */
     .footer {
         text-align: center;
         color: #969d9a;
@@ -228,49 +171,43 @@ st.markdown(
 
     </style>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
 
 
 # ============================================================
-# API HELPERS
+# HELPER FUNCTIONS
 # ============================================================
 
 def check_backend():
-
     try:
-
         response = requests.get(
             f"{API_URL}/health",
-            timeout=5,
+            timeout=10
         )
 
         if response.status_code == 200:
             return response.json()
 
     except requests.RequestException:
-        return None
+        pass
 
     return None
 
 
 def fetch_complaints():
-
     try:
-
         response = requests.get(
             f"{API_URL}/complaints",
-            timeout=10,
+            timeout=15
         )
 
         if response.status_code == 200:
-            return response.json().get(
-                "complaints",
-                [],
-            )
+            data = response.json()
+            return data.get("complaints", [])
 
     except requests.RequestException:
-        return []
+        pass
 
     return []
 
@@ -280,15 +217,21 @@ def safe_text(value, default="—"):
     if value is None:
         return default
 
-    if pd.isna(value):
-        return default
+    try:
+        if pd.isna(value):
+            return default
+    except (TypeError, ValueError):
+        pass
 
     text = str(value).strip()
 
-    return text if text else default
+    if not text:
+        return default
+
+    return text
 
 
-def metric(label, value):
+def show_metric(label, value):
 
     st.markdown(
         f"""
@@ -297,7 +240,7 @@ def metric(label, value):
             <div class="metric-value">{value}</div>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
@@ -305,52 +248,56 @@ def metric(label, value):
 # HEADER
 # ============================================================
 
-left_header, right_header = st.columns(
+header_left, header_right = st.columns(
     [5, 1],
-    vertical_alignment="center",
+    vertical_alignment="center"
 )
 
 
-with left_header:
+with header_left:
 
     st.markdown(
         '<div class="brand">ResolveIQ</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="tagline">'
         'AI Customer Complaint Intelligence & Resolution'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
-with right_header:
+with header_right:
 
     health = check_backend()
 
-    if health and health.get("database") == "connected":
+    if health:
 
         st.markdown(
-            '<div style="text-align:right;">'
-            '<span class="online">● System Online</span>'
-            '</div>',
-            unsafe_allow_html=True,
+            """
+            <div style="text-align:right;">
+                <span class="online">● System Online</span>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
     else:
 
         st.markdown(
-            '<div style="text-align:right;">'
-            '<span class="online">● Offline</span>'
-            '</div>',
-            unsafe_allow_html=True,
+            """
+            <div style="text-align:right;">
+                <span class="online">● Offline</span>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
 
 # ============================================================
-# NAVIGATION
+# TABS
 # ============================================================
 
 tab_overview, tab_analyze, tab_complaints, tab_insights = st.tabs(
@@ -358,31 +305,30 @@ tab_overview, tab_analyze, tab_complaints, tab_insights = st.tabs(
         "Overview",
         "Analyze Complaint",
         "Complaints",
-        "Insights",
+        "Insights"
     ]
 )
 
 
 # ============================================================
-# OVERVIEW
+# OVERVIEW TAB
 # ============================================================
 
 with tab_overview:
 
     st.markdown(
         '<div class="page-title">Complaint Overview</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="page-description">'
         'A simple view of your customer complaint operations.'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     complaints = fetch_complaints()
-
     df = pd.DataFrame(complaints)
 
     total = len(df)
@@ -390,11 +336,11 @@ with tab_overview:
     if not df.empty and "priority" in df.columns:
 
         critical = int(
-            (df["priority"] == "P1").sum()
+            (df["priority"].astype(str).str.upper() == "P1").sum()
         )
 
         high = int(
-            (df["priority"] == "P2").sum()
+            (df["priority"].astype(str).str.upper() == "P2").sum()
         )
 
     else:
@@ -402,11 +348,14 @@ with tab_overview:
         critical = 0
         high = 0
 
-
     if not df.empty and "status" in df.columns:
 
         open_cases = int(
-            (df["status"] == "Open").sum()
+            df["status"]
+            .astype(str)
+            .str.lower()
+            .eq("open")
+            .sum()
         )
 
     else:
@@ -418,30 +367,30 @@ with tab_overview:
 
 
     with m1:
-        metric(
+        show_metric(
             "Total Complaints",
-            total,
+            total
         )
 
 
     with m2:
-        metric(
+        show_metric(
             "Critical Cases",
-            critical,
+            critical
         )
 
 
     with m3:
-        metric(
+        show_metric(
             "High Priority",
-            high,
+            high
         )
 
 
     with m4:
-        metric(
+        show_metric(
             "Open Cases",
-            open_cases,
+            open_cases
         )
 
 
@@ -450,12 +399,12 @@ with tab_overview:
 
     st.markdown(
         '<div class="card">',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="card-title">Recent Complaints</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
@@ -467,20 +416,29 @@ with tab_overview:
             "category",
             "priority",
             "recommended_department",
-            "status",
+            "status"
         ]
 
-        available = [
-            col
-            for col in columns
-            if col in df.columns
+        available_columns = [
+            column
+            for column in columns
+            if column in df.columns
         ]
 
-        st.dataframe(
-            df[available].head(8),
-            width="stretch",
-            hide_index=True,
-        )
+        if available_columns:
+
+            st.dataframe(
+                df[available_columns].head(8),
+                width="stretch",
+                hide_index=True
+            )
+
+        else:
+
+            st.info(
+                "Complaint records are available, "
+                "but display fields were not found."
+            )
 
     else:
 
@@ -491,12 +449,12 @@ with tab_overview:
 
     st.markdown(
         "</div>",
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
 # ============================================================
-# ANALYZE COMPLAINT
+# ANALYZE COMPLAINT TAB
 # ============================================================
 
 with tab_analyze:
@@ -505,34 +463,34 @@ with tab_analyze:
         '<div class="page-title">'
         'Analyze Customer Complaint'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="page-description">'
-        'Enter a complaint and let ResolveIQ understand, prioritize, '
-        'route, and recommend a resolution.'
+        'Enter a complaint and let ResolveIQ understand, '
+        'prioritize, route and recommend a resolution.'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
-    col1, col2 = st.columns(2)
+    input_col1, input_col2 = st.columns(2)
 
 
-    with col1:
+    with input_col1:
 
         complaint_id = st.text_input(
             "Complaint ID",
-            value="UI-TEST-001",
+            value="UI-TEST-001"
         )
 
 
-    with col2:
+    with input_col2:
 
         customer_id = st.text_input(
             "Customer ID",
-            value="CUS-001",
+            value="CUS-001"
         )
 
 
@@ -542,54 +500,54 @@ with tab_analyze:
         placeholder=(
             "Example: I was charged twice and still haven't "
             "received my refund."
-        ),
+        )
     )
 
 
-    analyze = st.button(
+    analyze_button = st.button(
         "Analyze Complaint",
         type="primary",
-        width="stretch",
+        width="stretch"
     )
 
 
-    if analyze:
+    if analyze_button:
 
         if not complaint_text.strip():
 
             st.warning(
-                "Please enter a complaint."
+                "Please enter a complaint before analyzing."
             )
 
         else:
 
             payload = {
-                "complaint_id": complaint_id,
-                "customer_id": customer_id,
-                "complaint_text": complaint_text,
+                "complaint_id": complaint_id.strip(),
+                "customer_id": customer_id.strip(),
+                "complaint_text": complaint_text.strip()
             }
 
 
             try:
 
                 with st.spinner(
-                    "Analyzing complaint..."
+                    "ResolveIQ is analyzing the complaint..."
                 ):
 
                     response = requests.post(
                         f"{API_URL}/analyze",
                         json=payload,
-                        timeout=120,
+                        timeout=180
                     )
 
 
                 if response.status_code == 200:
 
-                    data = response.json()
+                    result = response.json()
 
-                    analysis = data.get(
+                    analysis = result.get(
                         "analysis",
-                        {},
+                        {}
                     )
 
 
@@ -598,20 +556,18 @@ with tab_analyze:
                     )
 
 
-                    # ====================================================
+                    # ------------------------------------------------
                     # AI ANALYSIS
-                    # ====================================================
+                    # ------------------------------------------------
 
                     st.markdown(
                         '<div class="card">',
-                        unsafe_allow_html=True,
+                        unsafe_allow_html=True
                     )
 
                     st.markdown(
-                        '<div class="card-title">'
-                        'AI Analysis'
-                        '</div>',
-                        unsafe_allow_html=True,
+                        '<div class="card-title">AI Analysis</div>',
+                        unsafe_allow_html=True
                     )
 
 
@@ -620,41 +576,41 @@ with tab_analyze:
 
                     with r1:
 
-                        metric(
+                        show_metric(
                             "Category",
                             safe_text(
                                 analysis.get("category")
-                            ),
+                            )
                         )
 
 
                     with r2:
 
-                        metric(
+                        show_metric(
                             "Sentiment",
                             safe_text(
                                 analysis.get("sentiment")
-                            ),
+                            )
                         )
 
 
                     with r3:
 
-                        metric(
+                        show_metric(
                             "Urgency",
                             safe_text(
                                 analysis.get("urgency")
-                            ),
+                            )
                         )
 
 
                     with r4:
 
-                        metric(
+                        show_metric(
                             "Priority",
                             safe_text(
                                 analysis.get("priority")
-                            ),
+                            )
                         )
 
 
@@ -663,33 +619,33 @@ with tab_analyze:
 
                     with r5:
 
-                        metric(
+                        show_metric(
                             "Emotion",
                             safe_text(
                                 analysis.get("emotion")
-                            ),
+                            )
                         )
 
 
                     with r6:
 
-                        metric(
+                        show_metric(
                             "Intent",
                             safe_text(
                                 analysis.get("intent")
-                            ),
+                            )
                         )
 
 
                     with r7:
 
-                        metric(
+                        show_metric(
                             "Department",
                             safe_text(
                                 analysis.get(
                                     "recommended_department"
                                 )
-                            ),
+                            )
                         )
 
 
@@ -701,115 +657,120 @@ with tab_analyze:
                             else "No"
                         )
 
-                        metric(
+                        show_metric(
                             "Anomaly",
-                            anomaly,
+                            anomaly
                         )
 
 
                     st.markdown(
                         "</div>",
-                        unsafe_allow_html=True,
+                        unsafe_allow_html=True
                     )
 
 
-                    # ====================================================
-                    # EXTRACTED INFORMATION
-                    # ====================================================
+                    # ------------------------------------------------
+                    # ENTITIES
+                    # ------------------------------------------------
 
                     entities = analysis.get(
                         "entities",
-                        {},
+                        {}
                     )
 
 
-                    actual_entities = {
-                        key: value
-                        for key, value in entities.items()
-                        if value not in [
-                            None,
-                            "",
-                            "null",
-                            "Not Found",
-                        ]
-                    }
+                    actual_entities = {}
+
+                    if isinstance(entities, dict):
+
+                        for key, value in entities.items():
+
+                            if value not in [
+                                None,
+                                "",
+                                "null",
+                                "Not Found"
+                            ]:
+
+                                actual_entities[key] = value
 
 
                     if actual_entities:
 
                         st.markdown(
                             '<div class="card">',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
                         st.markdown(
                             '<div class="card-title">'
                             'Extracted Information'
                             '</div>',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
-                        entity_data = pd.DataFrame(
-                            [
+                        entity_rows = []
+
+
+                        for key, value in actual_entities.items():
+
+                            entity_rows.append(
                                 {
-                                    "Entity":
-                                        key.replace(
-                                            "_",
-                                            " "
-                                        ).title(),
+                                    "Entity": key.replace(
+                                        "_",
+                                        " "
+                                    ).title(),
 
-                                    "Value":
-                                        value,
+                                    "Value": value
                                 }
+                            )
 
-                                for key, value
-                                in actual_entities.items()
-                            ]
+
+                        entity_df = pd.DataFrame(
+                            entity_rows
                         )
 
 
                         st.dataframe(
-                            entity_data,
+                            entity_df,
                             width="stretch",
-                            hide_index=True,
+                            hide_index=True
                         )
 
 
                         st.markdown(
                             "</div>",
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
-
 
                     else:
 
                         st.info(
                             "No specific customer, order, payment, "
-                            "date, or location details were detected."
+                            "date or location details were detected."
                         )
 
 
-                    # ====================================================
-                    # RECOMMENDATION + RESPONSE
-                    # ====================================================
+                    # ------------------------------------------------
+                    # RESOLUTION + RESPONSE
+                    # ------------------------------------------------
 
-                    left, right = st.columns(2)
+                    resolution_col, response_col = st.columns(2)
 
 
-                    with left:
+                    with resolution_col:
 
                         st.markdown(
                             '<div class="card">',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
-
 
                         st.markdown(
                             '<div class="card-title">'
                             'Recommended Resolution'
                             '</div>',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
@@ -817,7 +778,7 @@ with tab_analyze:
                             analysis.get(
                                 "recommended_resolution"
                             ),
-                            "No recommendation available.",
+                            "No recommendation available."
                         )
 
 
@@ -827,7 +788,7 @@ with tab_analyze:
                                 {resolution}
                             </div>
                             """,
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
@@ -836,7 +797,7 @@ with tab_analyze:
                             'style="margin-top:18px;">'
                             'Routing'
                             '</div>',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
@@ -855,23 +816,22 @@ with tab_analyze:
 
                         st.markdown(
                             "</div>",
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
-                    with right:
+                    with response_col:
 
                         st.markdown(
                             '<div class="card">',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
-
 
                         st.markdown(
                             '<div class="card-title">'
                             'AI Response'
                             '</div>',
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
@@ -879,7 +839,7 @@ with tab_analyze:
                             analysis.get(
                                 "ai_response"
                             ),
-                            "No response generated.",
+                            "No response generated."
                         )
 
 
@@ -889,7 +849,7 @@ with tab_analyze:
                                 {ai_response}
                             </div>
                             """,
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
@@ -908,89 +868,96 @@ with tab_analyze:
 
                         st.markdown(
                             "</div>",
-                            unsafe_allow_html=True,
+                            unsafe_allow_html=True
                         )
 
 
                 else:
 
                     st.error(
-                        f"API Error {response.status_code}: "
-                        f"{response.text}"
+                        f"API Error {response.status_code}"
+                    )
+
+                    st.code(
+                        response.text
                     )
 
 
             except requests.RequestException as error:
 
                 st.error(
-                    f"Could not connect to FastAPI: {error}"
+                    "Could not connect to the ResolveIQ backend."
+                )
+
+                st.caption(
+                    str(error)
                 )
 
 
 # ============================================================
-# COMPLAINT RECORDS
+# COMPLAINTS TAB
 # ============================================================
 
 with tab_complaints:
 
     st.markdown(
-        '<div class="page-title">'
-        'Complaint Records'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="page-title">Complaint Records</div>',
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="page-description">'
-        'All complaints currently stored in PostgreSQL.'
+        'All complaints currently stored in the database.'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
     complaints = fetch_complaints()
-
     df = pd.DataFrame(complaints)
 
 
     if not df.empty:
 
         search = st.text_input(
-            "Search",
+            "Search complaints",
             placeholder=(
-                "Search complaint ID, customer, category, "
+                "Search complaint ID, customer, category "
                 "or complaint text..."
-            ),
+            )
         )
 
 
-        filtered = df.copy()
+        filtered_df = df.copy()
 
 
         if search.strip():
 
+            search_value = search.strip()
+
+
             search_mask = (
-                filtered
+                filtered_df
                 .astype(str)
                 .apply(
                     lambda column:
                     column.str.contains(
-                        search,
+                        search_value,
                         case=False,
-                        na=False,
+                        na=False
                     )
                 )
                 .any(axis=1)
             )
 
 
-            filtered = filtered[
+            filtered_df = filtered_df[
                 search_mask
             ]
 
 
         st.write(
-            f"**{len(filtered)}** complaint(s)"
+            f"**{len(filtered_df)}** complaint(s) found"
         )
 
 
@@ -1005,22 +972,32 @@ with tab_complaints:
             "intent",
             "recommended_department",
             "status",
-            "created_at",
+            "created_at"
         ]
 
 
-        available = [
-            col
-            for col in columns
-            if col in filtered.columns
+        available_columns = [
+            column
+            for column in columns
+            if column in filtered_df.columns
         ]
 
 
-        st.dataframe(
-            filtered[available],
-            width="stretch",
-            hide_index=True,
-        )
+        if available_columns:
+
+            st.dataframe(
+                filtered_df[available_columns],
+                width="stretch",
+                hide_index=True
+            )
+
+        else:
+
+            st.dataframe(
+                filtered_df,
+                width="stretch",
+                hide_index=True
+            )
 
 
     else:
@@ -1031,28 +1008,25 @@ with tab_complaints:
 
 
 # ============================================================
-# INSIGHTS
+# INSIGHTS TAB
 # ============================================================
 
 with tab_insights:
 
     st.markdown(
-        '<div class="page-title">'
-        'Complaint Insights'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="page-title">Complaint Insights</div>',
+        unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="page-description">'
         'Understand complaint patterns and operational trends.'
         '</div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 
     complaints = fetch_complaints()
-
     df = pd.DataFrame(complaints)
 
 
@@ -1062,18 +1036,18 @@ with tab_insights:
             "Submit complaints to generate insights."
         )
 
-
     else:
 
-        # ====================================================
-        # CATEGORY
-        # ====================================================
+        # --------------------------------------------------------
+        # CATEGORY CHART
+        # --------------------------------------------------------
 
         if "category" in df.columns:
 
             category_data = (
                 df["category"]
                 .fillna("Unknown")
+                .astype(str)
                 .value_counts()
                 .reset_index()
             )
@@ -1081,7 +1055,7 @@ with tab_insights:
 
             category_data.columns = [
                 "Category",
-                "Count",
+                "Count"
             ]
 
 
@@ -1089,30 +1063,31 @@ with tab_insights:
                 category_data,
                 x="Category",
                 y="Count",
-                title="Complaints by Category",
+                title="Complaints by Category"
             )
 
 
             st.plotly_chart(
                 fig_category,
-                width="stretch",
+                width="stretch"
             )
 
 
-        # ====================================================
-        # SENTIMENT + PRIORITY
-        # ====================================================
+        # --------------------------------------------------------
+        # SENTIMENT
+        # --------------------------------------------------------
 
-        left, right = st.columns(2)
+        left_chart, right_chart = st.columns(2)
 
 
-        with left:
+        with left_chart:
 
             if "sentiment" in df.columns:
 
                 sentiment_data = (
                     df["sentiment"]
                     .fillna("Unknown")
+                    .astype(str)
                     .value_counts()
                     .reset_index()
                 )
@@ -1120,7 +1095,7 @@ with tab_insights:
 
                 sentiment_data.columns = [
                     "Sentiment",
-                    "Count",
+                    "Count"
                 ]
 
 
@@ -1128,23 +1103,28 @@ with tab_insights:
                     sentiment_data,
                     names="Sentiment",
                     values="Count",
-                    title="Sentiment Distribution",
+                    title="Sentiment Distribution"
                 )
 
 
                 st.plotly_chart(
                     fig_sentiment,
-                    width="stretch",
+                    width="stretch"
                 )
 
 
-        with right:
+        # --------------------------------------------------------
+        # PRIORITY
+        # --------------------------------------------------------
+
+        with right_chart:
 
             if "priority" in df.columns:
 
                 priority_data = (
                     df["priority"]
                     .fillna("Unknown")
+                    .astype(str)
                     .value_counts()
                     .reset_index()
                 )
@@ -1152,7 +1132,7 @@ with tab_insights:
 
                 priority_data.columns = [
                     "Priority",
-                    "Count",
+                    "Count"
                 ]
 
 
@@ -1160,25 +1140,26 @@ with tab_insights:
                     priority_data,
                     x="Priority",
                     y="Count",
-                    title="Priority Distribution",
+                    title="Priority Distribution"
                 )
 
 
                 st.plotly_chart(
                     fig_priority,
-                    width="stretch",
+                    width="stretch"
                 )
 
 
-        # ====================================================
+        # --------------------------------------------------------
         # DEPARTMENT
-        # ====================================================
+        # --------------------------------------------------------
 
         if "recommended_department" in df.columns:
 
             department_data = (
                 df["recommended_department"]
                 .fillna("Unknown")
+                .astype(str)
                 .value_counts()
                 .reset_index()
             )
@@ -1186,7 +1167,7 @@ with tab_insights:
 
             department_data.columns = [
                 "Department",
-                "Count",
+                "Count"
             ]
 
 
@@ -1194,13 +1175,13 @@ with tab_insights:
                 department_data,
                 x="Department",
                 y="Count",
-                title="Department Routing",
+                title="Department Routing"
             )
 
 
             st.plotly_chart(
                 fig_department,
-                width="stretch",
+                width="stretch"
             )
 
 
@@ -1214,6 +1195,6 @@ st.markdown(
         ResolveIQ · AI Customer Complaint Intelligence & Resolution
     </div>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
 ```
