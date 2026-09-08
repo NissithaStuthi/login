@@ -8,7 +8,7 @@ import plotly.express as px
 # CONFIGURATION
 # ============================================================
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://login-j0hk.onrender.com"
 
 st.set_page_config(
     page_title="ResolveIQ",
