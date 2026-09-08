@@ -1,0 +1,134 @@
+Complaint_ID,Complaint_Text,Predicted_Sentiment,Transformer_Sentiment,Transformer_Confidence,Predicted_Emotion,Emotion_Intensity
+BANK_101674,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1878541,"On XXXX XXXX, 2016, on Saturday at XXXX, I talked to a Charles Schwab customer service representative. I called to see why my check card could not be activated by phone. After answering all the identity questions from this representative ( address, social security number, and finally drivers license number ) she looked into my accounts. What had happened was that a card from an old account that I closed had been sent and this is why I could not activate it. After my question was answered, this rep proceeded to ask me if I was employed, what colleges I have attended, and what jobs I had worked at. Then she asked if I were going on vacation! I actually thought she was going to ask me what my net worth was! She then proceeded to insult me and say 'I do n't know why you are activating a check card with only this amount of money in your account '. My friend dealt with either this same woman or one like her 2 years ago. He contacted Charles Schwab with a question concerning his account. She asked him why he was withdrawing money from his account and THEN asked him what he was doing with it!! And 2 years ago, after the way he was treated, I decided NOT to use Schwab as my primary bank and closed ALL my accounts except for XXXX checking and brokerage account. Today XXXX/XXXX/2016 I closed the last remaining accounts. 
+I complained to Charles Schwab customer service by their online email. I received a response that basically stated that someone would call me. On XXXX/XXXX/2016 a male, who did not give his name, called me and claimed he had listen to the tape concerning the incident in question and said this was further verification for my identity, which is a lie. HE DID NOT LISTEN TO THE TAPE because he would have known that my identity had been verified and the female rep immediately pulled up my account information. This guy was raising his voice at me and justifying what this female customer service representative was asking. I had to yell at him to be quiet because I could not get a word in edge-wise and finally hung up on him and he was still with a raised voice yapping away. My identity was already verified and she was just being nosy. Charles Schwab never knew where I worked or what colleges I attended so this information was not used to verify anything. A nosy customer service representative could easily be tempted to commit fraud or theft with account holders. They are deceptively obtaining information, data mining, in the guise of the verification of identity. 
+",Positive,Negative,0.9993,Fear,Positive
+BANK_1619723,"I have been using rush card for almost 5 years happily until XXXX XXXX. At that time a software glitch became a nightmare. On a trip to XXXX XXXX for a work conference I was embarrassed when my card declined a transaction that I should have been able to afford easily, from there I suffered the continued embarrassment of having to rely on my co workers to finance my expenses including a ride home to the air port. Till this date I still do not have access to my funds. I have been reduced to borrowing money from friends and family to pay for basic expenses. Numerous calls and emails to this organization have gone unanswered. It is as if my money has disappeared. It is XXXX XXXX and I still can not acces my funds. 
+",Neutral,Negative,0.9997,Neutral,Neutral
+BANK_1743314,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_251934,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_473144,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2178313,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2375168,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_424847,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1403454,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_821107,,Neutral,Positive,0.7481,Neutral,Neutral
+CS_6265,"I'm having an issue with the {product_purchased}. Please assist. I'm sorry if there is a problem.
+
+(1528) A/B Testing Service
+
+<d=b>(3) (1) Product I've already contacted customer support multiple times, but the issue remains unresolved.",Negative,Negative,0.9987,Frustration,Negative
+BANK_2169175,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1257247,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1166710,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2191984,wells fargo bank allowed directv to go into my account which was not authorized to take {$560.00} out of my account which they did not have this account number to. the bank can not tell me how they got this account information to take the money out. when they had permission it was stop in XX/XX/2016 they took this money in XX/XX/2016 without my permission if the bank let anyone go into your account without having your information something is wrong with the system.,Negative,Negative,0.999,Neutral,Negative
+BANK_1600909,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_855392,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1841743,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1036901,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1097677,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_491843,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2355007,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2328960,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1685264,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1368290,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_31685,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_469095,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2309538,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_694695,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_116454,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_62811,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2296494,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1547108,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_410652,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1831146,"Suntrust Bank has consistently denied access to our available and deposited funds in our account under the guise of account security. We are making purchases for items for resale and they are consistently declined - for the SAME vendors - repeatedly. These are our daily vendors that we buy from EVERY DAY. We have called and asked that this be stopped as we will continue to make these purchases to fill our orders but they REFUSE to make any accommodation. This is outright denial of use of the funds in our account. 
+",Negative,Negative,0.9995,Fear,Negative
+BANK_40444,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1825010,"Bank with Wells Fargo opportunity checking account # XXXX. I received my social security XXXX award of {$1900.00} a month wanted to change my account to a regular account they refused my car was broken into and my XXXX letter was stolen and {$200.00} my tithe money i bought things from XXXX i also filed a report with shiriff 's for the theft of items in my car the day of incident i applied for loans from XXXX and with XXXX XXXX XXXX I opened an account with XXXX XXXX XXXX. setup to change my direct deposit to XXXX XXXX XXXX. I Closed my account with Wells Fargo they close my account and give me {$700.00} when I had {$760.00} I deposit the {$700.00} dollars in XXXX XXXX XXXX. iget denied for loans because Wells Fargo illegaly closed my account without giving me all my money they then destroy my relief of debt I am entitled to under XXXX law. I have yet to receive my {$64.00} from them my account was closed XX/XX/XXXX but I do n't have the rest of my money and they destroyed my credit also I am now have to hire a credit repair lawyer to fix my credit because bankruptcy i ca n't file because I filed XX/XX/XXXX. What can you do to Wells Fargo for their illegal actions. I am now having problems with returning items to XXXX purchased with my wells fargo account which is closed so that money is in limbo now. Thanks XXXX XXXX XXXX XXXX XXXX XXXX, NC XXXX XXXX XXXXXXXXXXXX 
+",Positive,Negative,0.9994,Fear,Positive
+BANK_720841,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_520204,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1761008,"I took out a {$100000.00} boat loan from US Bank XX/XX/XXXX. I have been making weekly payments on this loan of {$1000.00}. I believe the bank is miscalculating the interest that I owe and their deduction of interest. The interest rate on the loan is 4.12 %. 
+XX/XX/XXXX I paid XXXX in interest XX/XX/XXXX I paid XXXX in interest XX/XX/XXXX I paid XXXX in interest XX/XX/XXXX I paid XXXX in interest XX/XX/XXXX I paid XXXX in interest In XX/XX/XXXX I paid XXXX in interest I have never missed a WEEKLY payment of {$1000.00}, although it takes US Bank up to 2 1/2 weeks to post my payment ( then they back date it ). 
+
+As you can see, my interest payments went up XX/XX/XXXX, XX/XX/XXXX, then down in XX/XX/XXXX, but XX/XX/XXXX 's interest payment was still more than XX/XX/XXXX and XX/XX/XXXX As my principal goes down, so should the amount of interest I am paying. Further, on my checks it clearly says PRINCIPAL payment but they are still taking out interest ( which I would n't care, but they are doing something wrong because my interest payments should n't be going UP ... ) I called US Bank and got the run around. No one could explain to me why my interest payments are going up in certain months and why my most recent interest charge is more than what I paid XX/XX/XXXX. 
+",Positive,Negative,0.99,Neutral,Positive
+BANK_990094,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_489568,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_755841,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_972241,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_528938,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2000562,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2346996,,Neutral,Positive,0.7481,Neutral,Neutral
+CS_2955,"I'm having an issue with the {product_purchased}. Please assist.
+
+As I said, just because I can't get my current iPhone the last time I go to the store, does not mean I know which is which. I've checked the device settings and made sure that everything is configured correctly.",Positive,Negative,0.7544,Frustration,Positive
+BANK_413246,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_41083,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_799385,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2311053,I have been trying for at least 12 years to enroll in online account access to my savings account with Navy Federal Credit Union. I have called on many occasions day after day month after month year after year and been told because I filed bankruptcy I have lost my privileges to access my account online. This bankruptcy happened over 12 years ago it is not even in my credit anymore but some how Navy Federal Credit Union has my account flagged to never allow me to have online account access. I never heard of being punished for life for a bankruptcy that happened many years ago.,Positive,Negative,0.9985,Sadness,Positive
+BANK_2133283,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_224962,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_404461,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_518643,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_647133,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2322417,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1762034,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_887407,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2411803,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1782378,,Neutral,Positive,0.7481,Neutral,Neutral
+CS_8094,"I've accidentally deleted important data from my {product_purchased}. Is there any way to recover the deleted files? I need them urgently. What sort of tools can we use to restore deleted items?
+
+I am using iCloud to retrieve I've tried clearing the cache and data for the {product_purchased} app, but the issue persists.",Positive,Negative,0.9994,Frustration,Positive
+BANK_1269438,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1984057,"Since reporting an issue with my checking account ending in XXXX to chase, about which XXXX unauthorized debit and XXXX unexpected ( and new ) {$20.00} chase fee, sent my account into a cascading negative state, fees and penalties have continued to mount ... .in amounts that I ca n't realistically pay, even in it were fair. 
+
+How can chase justify roughly XXXX dollars in overdraft fees that have mounted ( and were contributed to by the fees themselves ) that all were started from XXXX unauthorized debit ... .. after which a handful of new debits came through, were not paid and were then accessed fees. It 's is unfair and outrageous considering I notified chase of the errors and my intention to try and stop the bleeding and chase simply rolled out the excuse "" you 've had reversals in the past so we ca n't help you. '' It should be illegal what has happened here.",Negative,Negative,0.999,Frustration,Negative
+BANK_636213,,Neutral,Positive,0.7481,Neutral,Neutral
+CS_8019,"I'm having an issue with the {product_purchased}. Please assist. It would be great if this were the case. Thank you for making this purchase. You have put the most value in your life, but now, in the middle I've recently updated the firmware of my {product_purchased}, and the issue started happening afterward. Could it be related to the update?",Positive,Negative,0.5758,Satisfaction,Positive
+BANK_1598652,"My father a retired XXXX year XXXX XXXX Veteran recently passed away and I went to his local bank, Regions, located at XXXX XXXX XXXX XXXX in XXXX, AL to notify them ( and provide a death certificate ). I asked the bank to place a hold on his checking account to prevent any unauthorized debits while we completed the probate process and the bank personnel refused to do so. They were extremely rude and demanded that I provide letters of testamentary from the probate court, even though I was not trying to access the account. 
+",Negative,Negative,0.9985,Neutral,Negative
+BANK_2333930,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_761321,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_187832,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_437525,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_78250,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_794000,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_70086,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_636184,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2193755,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1652036,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1642172,"In XXXX 2015 I mailed out a check for {$890.00} to XXXX XXXX who is my landlord. This check was for my rent. This check number was XXXX. On XXXX XXXX I noticed the check was cashed against my account. On XXXX XXXX My landlord called me and stated she still had not received the check. I then went to XXXX bank and they printed out the check for me. The signature on the back of the check was signed XXXX XXXX. I filed a claim with XXXX bank on XXXX XXXX stating I did not give XXXX XXXX permission to cash my check. The claims department stated they did not receive my claim and I had to go back to the bank 3 times to resend it. They finally received the claim on XXXX XXXX. I called XXXX claims department to check on the claim and they stated the claim was approved and I should have the money in my account 3-7 business days. On the 6th business day I called again to check on when I was getting my money and I was told the claim was n't approved it was actually denied. XXXX then told me they got Bank of America to reopen the claim and it should be completed within 30 days. I then received a call from XXXX XXXX from the XXXX XXXX station where I currently live. He told me the cops found XXXX XXXX XXXX in possession of my mail and about XXXX other victims. He then asked if I wrote a check to XXXX XXXX for {$890.00} and I told him yes. He said that this suspect by the name of XXXX XXXX XXXX was arrested for fraud and that they had the suspect who stole my check and gave me a police report number. The report number is XXXX. I then called XXXX and gave them the police report information. I was then told on XXXX XXXX 2015 that XXXX sent Bank of America a demand letter. On XXXX XXXX XXXX did a follow up with Bank Of America and Bank of America stated an expected date of completion would be XXXX XXXX. On XXXX XXXX XXXX informed me they closed the claim due it being beyond the 120 days that they had to work on this claim. I called Bank of America and all they would tell me is that they denied the claim with XXXX. If this matter is not resolved I am going to follow through with a lawyer and sue for this amount plus more. This has cause me to have to move and put a lot of stress on me after I gave birth to my son. 
+",Negative,Negative,0.9978,Disappointment,Negative
+BANK_847369,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_265175,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2357314,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2078089,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2032417,"I believe TCF bank submits items in an order that creates additional overdraft fees. I have several examples I can send in the next few days. My account has been overdrawn due to my own behavior, but I believe they have exacerbated the problem with unreasonableXXXX overdraft charges. I call them every month and they forgive a few but the next month I see charges moved around which creates additional overdraft fees to the tune of 100 's of dollars this year alone.",Negative,Negative,0.9981,Frustration,Negative
+BANK_662558,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1225071,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1209413,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1880260,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_527134,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1634255,"First Merit Bank and its employee XXXX XXXX XXXX committed fraud by lying to me on more than one occasion. On XXXX XXXX, 2015, in response to the Bank 's advertisement for free checking, I inquired in person at its XXXX XXXX, Ohio branch. The ad stated "" no minimum balance '' and "" no monthly maintenance fee ''. I asked about transfer of money and was told by XXXX that I could transfer the money anywhere without a fee. I and my husband, XXXX XXXX, spent considerable time asking questions, including "" whether there were any hidden fees ''. XXXX repeatedly stated that the account was totally free. He also told me that I would be given a {$150.00} bonus if I set up direct deposit. Based on his extensive information and answers, I opened a checking account. The person who handled the opening, under the direction of XXXX, is identified on the receipt as "" XXXX ''. I was given a receipt for the deposit, but NO schedule of fees, which I did not expect because XXXX told me that there were no fees. 
+I then went through the timely effort of switching my direct deposit instructions with my employer. 
+Shortly afterwards, when I tried to transfer money from this account, I learned that there would be a fee. I complained in person to XXXX. He then told me that only transfers to another account at First Merit Bank are free ( which he knew I did not have ) and that transfers to other institutions required payment of fees. I, with my husband present during this discussion, requested that my account be closed because he, XXXX, had given me wrong information at the time I opened the account. To cover his earlier lies, he said that there would be a fee if I closed the account within 90 days. I was never informed of this when I opened the account, being told that there were no fees whatsoever. He refused to give me the full balance in my account. 
+So, based on his advice to "" wait at least three months to get ALL of your money back '', I did not withdraw any money. XXXX, never told me that by waiting I would be charged an inactivity fee. Again, XXXX committed fraud by misleading me. 
+Shortly afterwards because I could not transfer my money out to another institution without being charged a fee on the "" free '' checking promised by XXXX, I went through additional effort to change my direct deposit of salary from First Merit Bank back to my previous bank. 
+I was never credited {$150.00} for setting up direct deposit with First Merit Bank. 
+Today, I went to the same branch to withdraw the balance of my money and close the not useful account. XXXX failed to give me the full amount I had deposited, but kept {$28.00} of my money. When I asked him why he had not given me the full amount of my deposit, he stated that there was an inactive account fee. I was never informed of this, either at the time of opening the account or when I complained about his lying about free transfers. 
+When my husband complained to him about the lousy service and asked to have the branch manager informed, XXXX with a mean look on his face and a shouted voice, threatened to "" escort ( him ) outside '', saying that he, XXXX, did not want any other customer to hear a complaint. 
+First Merit Bank employee XXXX repeatedly misled me and lied to me. He did not once indicate that there were any fees, but repeatedly stated that there were none. XXXX should be fired for purposely deceiving a consumer and First Merit Bank should both be fined for its fraud upon the public and institute a mandatory retraining of all its employees regarding not lying to, but informing, potential and actual customers of fees. 
+Furthermore, First Merit Bank should refund to me {$28.00} plus interest and pay me {$150.00} for setting up direct deposit based upon its fraud. 
+",Negative,Negative,0.9941,Frustration,Negative
+BANK_407509,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1322504,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_2315064,On XX/XX/XXXX I was charged XXXX by XXXX. I had canceled my membership well before the renewal period in XX/XX/XXXX. I went into Regions Bank on XX/XX/XXXX to dispute this transaction and provided them with the cancelation number as I had not received a refund back from XXXX. On XX/XX/XXXX I received a letter form Regions stating that my claim was denied. the letter sated that my claim shows I cancelled after the transaction date! WHAT! I told Rgions this was straight up fraud by XXXX. I never authorized XXXX to charge my card and I revoked my authorization for them to renew my membership. I have tried to resolve this with XXXX and Regions and have not been able to. This charge is straight up fraud by XXXX.,Negative,Negative,0.9995,Neutral,Negative
+BANK_103373,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1501935,"Over the past year I have witnessed multiple situations where PNC Bank took liberties to manage my transactions in a manner that gave them car-blanch to assess "" Over Draft '' charges to my checking account. Up to this point I accepted the bank errors. That is going to change. 
+On XXXX/XXXX/15 I reviewed my account to find that I received XXXX over draft charges of {$35.00} to the sum of {$70.00} in debits to my account. The charges made no sense to me. Per my online banking statement I had a close of business balance of {$38.00} as of XXXX/XXXX/15 and no new Posted transactions to my account for XXXX/XXXX/15. My ending balance on XXXX/XXXX/15 was {$400.00}. I had XXXX transactions post to my account on XXXX/XXXX/15. A deposit for {$74.00}. and XXXX debits totaling {$440.00}. I had XXXX items in Pending Transactions totaling {$140.00}. After speaking with PNC representatives the explanation to my over drafts are that PNC took liberties and applied XXXX transactions that are being held in my Pending transactions to my Posted transactions. I was told there is a difference between a Firm hold and a soft Hold. I was told that the online banking system is not as accurate as the banks accounting system. I was told that I was incorrect and that I must be wrong because I have had over drafts in the past and my past history dictates that I am wrong. Basic accounting principles prove that I am right along with basic math principles. After speaking with XXXX agents from PNC I am under the impression that PNC is without question breaking some sort of law in an attempt to force over draft charges onto its customers. Very similar to when they received a XXXX XXXX dollar judgement to pay back moneys they gathered through over draft charges. I have screen shots and documentation to support my claim. Not one PNC representative can justify or show a ledger that conflicts with my documentation. 
+",Negative,Negative,0.9992,Neutral,Negative
+BANK_408876,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1846463,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_460844,,Neutral,Positive,0.7481,Neutral,Neutral
+BANK_1026557,,Neutral,Positive,0.7481,Neutral,Neutral

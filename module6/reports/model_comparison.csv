@@ -1,0 +1,5 @@
+Model,Accuracy,F1_Score
+Linear SVM,63.26,62.88
+Random Forest,62.47,61.58
+Logistic Regression,59.11,58.83
+Naive Bayes,51.55,41.87

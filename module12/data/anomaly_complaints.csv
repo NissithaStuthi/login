@@ -1,0 +1,2 @@
+Complaint_Day,Complaint_Count,Rolling_Average,Deviation_From_Average,Anomaly_Label,Anomaly_Score
+2028-07-19,9.0,21.857142857142858,-12.857142857142858,Anomaly,-0.10299003238465565

@@ -1,0 +1,11 @@
+,Account,Billing,Cancellation,Delivery,Payment,Product,Refund,Security,Subscription,Technical Support
+Account,286,4,12,0,21,9,6,1,0,5
+Billing,18,94,43,0,24,46,20,1,1,20
+Cancellation,10,55,71,1,11,63,27,1,0,116
+Delivery,4,1,1,41,1,2,2,0,0,1
+Payment,47,11,6,4,988,4,34,19,2,14
+Product,3,56,33,0,9,53,16,0,0,27
+Refund,10,50,55,7,65,55,216,1,0,110
+Security,3,3,2,1,35,1,9,864,0,0
+Subscription,3,1,0,0,0,0,1,0,2,0
+Technical Support,39,54,77,0,20,51,46,3,0,337

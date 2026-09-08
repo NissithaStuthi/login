@@ -1,0 +1,6 @@
+Test,Complaint,Category,Intent,Department,Recommended_Resolution
+1,My payment was successful but the order was not created.,Payment,Payment Issue,Payments,Verify the payment transaction and confirm the order status. Initiate a refund or retry the transaction when necessary.
+2,I want a refund because I was charged for an order that was cancelled.,Refund,Refund Request,Finance,"Verify the original transaction and refund status, then process or escalate the refund request."
+3,Someone accessed my account and made an unauthorized transaction.,Security,Payment Issue,Security,"Secure the customer account immediately, verify the suspicious transaction, and escalate the complaint to the security team."
+4,My order arrived damaged and I want a replacement.,Product,Product Replacement,Product Support,"Verify the product issue and arrange replacement, return, or repair as appropriate."
+5,I cannot login to my account and need help resetting my password.,Technical Support,Account Recovery,Technical Support,Verify the account and assist the customer with password reset or account recovery.

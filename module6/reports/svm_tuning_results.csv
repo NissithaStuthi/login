@@ -1,0 +1,10 @@
+TFIDF,C,Accuracy,F1_Score
+Unigram,2.0,66.75,66.61
+Unigram,1.0,66.75,66.51
+Unigram,0.5,66.28,65.91
+Unigram + Bigram,2.0,65.09,64.57
+Unigram + Bigram,1.0,64.94,64.43
+Unigram + Bigram,0.5,64.8,64.2
+Bigram,1.0,64.91,64.2
+Bigram,2.0,64.91,64.11
+Bigram,0.5,64.73,64.02

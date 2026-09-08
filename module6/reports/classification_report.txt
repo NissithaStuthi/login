@@ -1,0 +1,41 @@
+
+MODULE 6 - COMPLAINT CLASSIFICATION MODEL EVALUATION
+====================================================
+
+Dataset Size: 22329
+Training Samples: 17863
+Testing Samples: 4466
+
+Algorithm: Linear Support Vector Machine (LinearSVC)
+
+TF-IDF Configuration:
+- N-gram Range: (1,1)
+- Minimum Document Frequency: 2
+- Maximum Features: 50,000
+- Stop Words: English
+- Sublinear TF: Enabled
+
+SVM Configuration:
+- C: 2.0
+- Class Weight: balanced
+
+Accuracy: 66.10%
+
+Classification Report:
+                   precision    recall  f1-score   support
+
+          Account       0.68      0.83      0.75       344
+          Billing       0.29      0.35      0.32       267
+     Cancellation       0.24      0.20      0.22       355
+         Delivery       0.76      0.77      0.77        53
+          Payment       0.84      0.88      0.86      1129
+          Product       0.19      0.27      0.22       197
+           Refund       0.57      0.38      0.46       569
+         Security       0.97      0.94      0.96       918
+     Subscription       0.40      0.29      0.33         7
+Technical Support       0.53      0.54      0.54       627
+
+         accuracy                           0.66      4466
+        macro avg       0.55      0.54      0.54      4466
+     weighted avg       0.67      0.66      0.66      4466
+

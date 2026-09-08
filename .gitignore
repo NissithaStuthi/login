@@ -1,0 +1,5 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+module4/data/processed/processed_customer_complaints.csv

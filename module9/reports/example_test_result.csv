@@ -1,0 +1,2 @@
+Input,Order_ID,Amount,Date,Intent
+"I want a refund for order #ORD4567. ₹2,500 was charged on August 28.",,"₹2,500",August 28,Refund Request
