@@ -2,6 +2,8 @@ import requests
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import uuid
+import html
 
 
 # ============================================================
@@ -24,149 +26,331 @@ API_URL = "https://login-j0hk.onrender.com"
 
 
 # ============================================================
+# SESSION STATE
+# ============================================================
+
+if "theme" not in st.session_state:
+    st.session_state.theme = "Bright"
+
+if "last_result" not in st.session_state:
+    st.session_state.last_result = None
+
+
+# ============================================================
+# THEME COLORS
+# ============================================================
+
+if st.session_state.theme == "Dark":
+
+    BG = "#101817"
+    CARD = "#182321"
+    CARD_BORDER = "#344842"
+
+    TEXT = "#F5FAF8"
+    HEADING = "#E5F5F0"
+    MUTED = "#B7C7C2"
+
+    INPUT_BG = "#202D2A"
+    INPUT_BORDER = "#465B54"
+
+    RESULT_BG = "#18302B"
+    RESULT_BORDER = "#3C7466"
+
+    RESOLUTION_BG = "#292820"
+    RESOLUTION_BORDER = "#5A5545"
+
+    TEAL = "#65D2B7"
+
+    ONLINE_BG = "#173D34"
+    ONLINE_TEXT = "#76E2C9"
+
+    SHADOW = "rgba(0,0,0,0.30)"
+
+    TAB_INACTIVE_BG = "#1E2B28"
+    TAB_INACTIVE_TEXT = "#E8F2EF"
+
+    PLOT_TEMPLATE = "plotly_dark"
+
+else:
+
+    BG = "#F7F5F0"
+    CARD = "#FFFFFF"
+    CARD_BORDER = "#E1DED6"
+
+    TEXT = "#263833"
+    HEADING = "#173F3A"
+    MUTED = "#6F7B76"
+
+    INPUT_BG = "#FFFFFF"
+    INPUT_BORDER = "#D4DBD7"
+
+    RESULT_BG = "#F1F7F4"
+    RESULT_BORDER = "#D3E7DF"
+
+    RESOLUTION_BG = "#FAF8F3"
+    RESOLUTION_BORDER = "#E5DFD1"
+
+    TEAL = "#28735F"
+
+    ONLINE_BG = "#E7F4EE"
+    ONLINE_TEXT = "#28735F"
+
+    SHADOW = "rgba(30,45,40,0.06)"
+
+    TAB_INACTIVE_BG = "#FFFFFF"
+    TAB_INACTIVE_TEXT = "#263833"
+
+    PLOT_TEMPLATE = "plotly_white"
+
+
+# ============================================================
 # CUSTOM CSS
 # ============================================================
 
 st.markdown(
-    """
+    f"""
     <style>
 
-    /* Hide Streamlit header */
-    header[data-testid="stHeader"] {
+    header[data-testid="stHeader"] {{
         display: none !important;
-    }
+    }}
 
-    /* Hide toolbar */
-    [data-testid="stToolbar"] {
+    [data-testid="stToolbar"] {{
         display: none !important;
-    }
+    }}
 
-    /* Hide decoration */
-    [data-testid="stDecoration"] {
+    [data-testid="stDecoration"] {{
         display: none !important;
-    }
+    }}
 
-    /* Main page */
-    .block-container {
+    .stApp {{
+        background-color: {BG} !important;
+        color: {TEXT} !important;
+    }}
+
+    .block-container {{
         max-width: 1200px;
-        padding-top: 20px !important;
+        padding-top: 25px !important;
         padding-bottom: 50px !important;
-    }
+    }}
 
-    .stApp {
-        background-color: #f7f5f0;
-    }
-
-    /* ResolveIQ logo */
-    .brand {
-        font-size: 40px;
+    .brand {{
+        font-size: 42px;
         font-weight: 800;
-        color: #173f3a;
+        color: {HEADING} !important;
         letter-spacing: -1.5px;
         line-height: 1.1;
-    }
+    }}
 
-    .tagline {
-        color: #747d7a;
+    .tagline {{
+        color: {MUTED} !important;
         font-size: 14px;
-        margin-top: 4px;
-    }
+        margin-top: 5px;
+    }}
 
-    /* Online status */
-    .online {
-        background-color: #e7f4ee;
-        color: #28735f;
-        padding: 7px 13px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    /* Page headings */
-    .page-title {
-        color: #173f3a;
+    .page-title {{
+        color: {HEADING} !important;
         font-size: 30px;
         font-weight: 800;
         margin-top: 25px;
         margin-bottom: 5px;
-    }
+    }}
 
-    .page-description {
-        color: #747d7a;
+    .page-description {{
+        color: {MUTED} !important;
         font-size: 15px;
         margin-bottom: 22px;
-    }
+    }}
 
-    /* Cards */
-    .card {
-        background-color: white;
-        border: 1px solid #e8e5de;
+    .online {{
+        background-color: {ONLINE_BG};
+        color: {ONLINE_TEXT} !important;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }}
+
+    .card {{
+        background-color: {CARD} !important;
+        border: 1px solid {CARD_BORDER};
         border-radius: 15px;
         padding: 20px;
         margin-bottom: 18px;
-        box-shadow: 0 4px 16px rgba(30, 45, 40, 0.04);
-    }
+        box-shadow: 0 4px 16px {SHADOW};
+    }}
 
-    .card-title {
-        color: #173f3a;
+    .card-title {{
+        color: {HEADING} !important;
         font-size: 17px;
         font-weight: 750;
         margin-bottom: 14px;
-    }
+    }}
 
-    /* Metric cards */
-    .metric {
-        background-color: white;
-        border: 1px solid #e8e5de;
+    .metric {{
+        background-color: {CARD} !important;
+        border: 1px solid {CARD_BORDER};
         border-radius: 15px;
         padding: 18px;
         min-height: 100px;
-        box-shadow: 0 4px 16px rgba(30, 45, 40, 0.04);
-    }
+        box-shadow: 0 4px 16px {SHADOW};
+    }}
 
-    .metric-label {
-        color: #7d8582;
+    .metric-label {{
+        color: {MUTED} !important;
         font-size: 12px;
         margin-bottom: 8px;
-    }
+    }}
 
-    .metric-value {
-        color: #173f3a;
-        font-size: 26px;
+    .metric-value {{
+        color: {HEADING} !important;
+        font-size: 24px;
         font-weight: 800;
-    }
+        word-break: break-word;
+    }}
 
-    /* Result boxes */
-    .result-box {
-        background-color: #f1f7f4;
-        border: 1px solid #dbeae4;
+    .result-box {{
+        background-color: {RESULT_BG} !important;
+        border: 1px solid {RESULT_BORDER};
         border-radius: 13px;
         padding: 18px;
         line-height: 1.6;
-        color: #34423e;
-    }
+        color: {TEXT} !important;
+    }}
 
-    .resolution-box {
-        background-color: #faf8f3;
-        border: 1px solid #e9e3d8;
+    .resolution-box {{
+        background-color: {RESOLUTION_BG} !important;
+        border: 1px solid {RESOLUTION_BORDER};
         border-radius: 13px;
         padding: 18px;
         line-height: 1.6;
-        color: #3f4946;
-    }
+        color: {TEXT} !important;
+    }}
 
-    /* Tabs */
-    button[data-baseweb="tab"] {
-        font-weight: 600;
-    }
+    div[data-baseweb="input"] {{
+        background-color: {INPUT_BG} !important;
+        border-radius: 10px !important;
+    }}
 
-    /* Footer */
-    .footer {
+    div[data-baseweb="textarea"] {{
+        background-color: {INPUT_BG} !important;
+        border-radius: 10px !important;
+    }}
+
+    div[data-baseweb="input"] input,
+    div[data-baseweb="textarea"] textarea {{
+        background-color: {INPUT_BG} !important;
+        color: {TEXT} !important;
+        -webkit-text-fill-color: {TEXT} !important;
+    }}
+
+    div[data-baseweb="input"] input::placeholder,
+    div[data-baseweb="textarea"] textarea::placeholder {{
+        color: {MUTED} !important;
+        opacity: 1 !important;
+    }}
+
+    div[data-baseweb="select"] > div {{
+        background-color: {CARD} !important;
+        color: {TEXT} !important;
+        border: 2px solid {TEAL} !important;
+        border-radius: 10px !important;
+        min-width: 110px !important;
+    }}
+
+    div[data-baseweb="select"] > div * {{
+        color: {TEXT} !important;
+        -webkit-text-fill-color: {TEXT} !important;
+        font-weight: 700 !important;
+    }}
+
+    .stTabs [data-baseweb="tab-list"] {{
+        gap: 8px;
+        background: transparent !important;
+        padding: 8px 0 18px 0;
+    }}
+
+    .stTabs button[data-baseweb="tab"] {{
+        background-color: {TAB_INACTIVE_BG} !important;
+        border: 1px solid {CARD_BORDER} !important;
+        border-radius: 10px !important;
+        padding: 11px 20px !important;
+        min-height: 44px !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+    }}
+
+    .stTabs button[data-baseweb="tab"],
+    .stTabs button[data-baseweb="tab"] *,
+    .stTabs button[data-baseweb="tab"] p,
+    .stTabs button[data-baseweb="tab"] div,
+    .stTabs button[data-baseweb="tab"] span {{
+        color: {TAB_INACTIVE_TEXT} !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: {TAB_INACTIVE_TEXT} !important;
+    }}
+
+    .stTabs button[data-baseweb="tab"]:hover,
+    .stTabs button[data-baseweb="tab"]:hover * {{
+        background-color: {RESULT_BG} !important;
+        color: {TEAL} !important;
+        border-color: {TEAL} !important;
+        -webkit-text-fill-color: {TEAL} !important;
+    }}
+
+    .stTabs button[data-baseweb="tab"][aria-selected="true"],
+    .stTabs button[data-baseweb="tab"][aria-selected="true"] * {{
+        background-color: {RESULT_BG} !important;
+        color: {TEAL} !important;
+        border: 2px solid {TEAL} !important;
+        font-weight: 800 !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: {TEAL} !important;
+    }}
+
+    .stButton > button {{
+        border-radius: 10px !important;
+        font-weight: 700 !important;
+        min-height: 44px !important;
+    }}
+
+    [data-testid="stAlert"] {{
+        border-radius: 12px !important;
+    }}
+
+    [data-testid="stDataFrame"] {{
+        border-radius: 10px !important;
+        overflow: hidden;
+    }}
+
+    .footer {{
         text-align: center;
-        color: #969d9a;
+        color: {MUTED} !important;
         font-size: 12px;
         padding-top: 35px;
-    }
+    }}
+
+    .customer-note {{
+        background-color: {RESULT_BG};
+        border: 1px solid {RESULT_BORDER};
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        color: {TEXT};
+        font-size: 14px;
+        line-height: 1.5;
+    }}
+
+    .complaint-id-box {{
+        background-color: {RESULT_BG};
+        border: 1px solid {RESULT_BORDER};
+        border-radius: 12px;
+        padding: 14px 16px;
+        color: {TEXT};
+        margin-bottom: 18px;
+    }}
 
     </style>
     """,
@@ -179,7 +363,9 @@ st.markdown(
 # ============================================================
 
 def check_backend():
+
     try:
+
         response = requests.get(
             f"{API_URL}/health",
             timeout=10
@@ -195,14 +381,18 @@ def check_backend():
 
 
 def fetch_complaints():
+
     try:
+
         response = requests.get(
             f"{API_URL}/complaints",
-            timeout=15
+            timeout=20
         )
 
         if response.status_code == 200:
+
             data = response.json()
+
             return data.get("complaints", [])
 
     except requests.RequestException:
@@ -217,8 +407,10 @@ def safe_text(value, default="—"):
         return default
 
     try:
+
         if pd.isna(value):
             return default
+
     except (TypeError, ValueError):
         pass
 
@@ -235,12 +427,22 @@ def show_metric(label, value):
     st.markdown(
         f"""
         <div class="metric">
-            <div class="metric-label">{label}</div>
-            <div class="metric-value">{value}</div>
+            <div class="metric-label">{html.escape(str(label))}</div>
+            <div class="metric-value">{html.escape(str(value))}</div>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+
+def generate_complaint_id():
+
+    return "CAA-" + uuid.uuid4().hex[:8].upper()
+
+
+def generate_customer_id():
+
+    return "CUS-" + uuid.uuid4().hex[:8].upper()
 
 
 # ============================================================
@@ -296,6 +498,40 @@ with header_right:
 
 
 # ============================================================
+# THEME SELECTOR
+# ============================================================
+
+theme_left, theme_right = st.columns([3, 2])
+
+with theme_right:
+
+    st.caption("Theme")
+
+    selected_theme = st.selectbox(
+        "Theme",
+        ["Bright", "Dark"],
+        index=(
+            0
+            if st.session_state.theme == "Bright"
+            else 1
+        ),
+        label_visibility="collapsed"
+    )
+
+new_theme = (
+    "Dark"
+    if selected_theme == "Dark"
+    else "Bright"
+)
+
+if new_theme != st.session_state.theme:
+
+    st.session_state.theme = new_theme
+
+    st.rerun()
+
+
+# ============================================================
 # TABS
 # ============================================================
 
@@ -328,6 +564,7 @@ with tab_overview:
     )
 
     complaints = fetch_complaints()
+
     df = pd.DataFrame(complaints)
 
     total = len(df)
@@ -335,11 +572,21 @@ with tab_overview:
     if not df.empty and "priority" in df.columns:
 
         critical = int(
-            (df["priority"].astype(str).str.upper() == "P1").sum()
+            (
+                df["priority"]
+                .astype(str)
+                .str.upper()
+                == "P1"
+            ).sum()
         )
 
         high = int(
-            (df["priority"].astype(str).str.upper() == "P2").sum()
+            (
+                df["priority"]
+                .astype(str)
+                .str.upper()
+                == "P2"
+            ).sum()
         )
 
     else:
@@ -350,51 +597,33 @@ with tab_overview:
     if not df.empty and "status" in df.columns:
 
         open_cases = int(
-            df["status"]
-            .astype(str)
-            .str.lower()
-            .eq("open")
-            .sum()
+            (
+                df["status"]
+                .astype(str)
+                .str.lower()
+                == "open"
+            ).sum()
         )
 
     else:
 
         open_cases = 0
 
-
     m1, m2, m3, m4 = st.columns(4)
 
-
     with m1:
-        show_metric(
-            "Total Complaints",
-            total
-        )
-
+        show_metric("Total Complaints", total)
 
     with m2:
-        show_metric(
-            "Critical Cases",
-            critical
-        )
-
+        show_metric("Critical Cases", critical)
 
     with m3:
-        show_metric(
-            "High Priority",
-            high
-        )
-
+        show_metric("High Priority", high)
 
     with m4:
-        show_metric(
-            "Open Cases",
-            open_cases
-        )
-
+        show_metric("Open Cases", open_cases)
 
     st.write("")
-
 
     st.markdown(
         '<div class="card">',
@@ -405,7 +634,6 @@ with tab_overview:
         '<div class="card-title">Recent Complaints</div>',
         unsafe_allow_html=True
     )
-
 
     if not df.empty:
 
@@ -445,7 +673,6 @@ with tab_overview:
             "No complaints have been submitted yet."
         )
 
-
     st.markdown(
         "</div>",
         unsafe_allow_html=True
@@ -467,70 +694,109 @@ with tab_analyze:
 
     st.markdown(
         '<div class="page-description">'
-        'Enter a complaint and let ResolveIQ understand, '
-        'prioritize, route and recommend a resolution.'
+        'Tell us what happened. ResolveIQ will understand your issue, '
+        'prioritize it, route it to the right team and recommend a resolution.'
         '</div>',
         unsafe_allow_html=True
     )
 
+    st.markdown(
+        """
+        <div class="customer-note">
+            <b>How it works:</b>
+            Describe your problem in your own words.
+            You do not need to know the complaint category, priority,
+            department or technical details. ResolveIQ will determine
+            these automatically.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    input_col1, input_col2 = st.columns(2)
+    # --------------------------------------------------------
+    # CUSTOMER INPUT
+    # --------------------------------------------------------
 
+    name_col, id_col = st.columns(2)
 
-    with input_col1:
+    with name_col:
 
-        complaint_id = st.text_input(
-            "Complaint ID",
-            value="UI-TEST-001"
+        customer_name = st.text_input(
+            "Customer Name",
+            placeholder="Enter customer name"
         )
 
+    with id_col:
 
-    with input_col2:
-
-        customer_id = st.text_input(
-            "Customer ID",
-            value="CUS-001"
+        transaction_id = st.text_input(
+            "Order / Transaction ID",
+            placeholder="Optional"
         )
-
 
     complaint_text = st.text_area(
         "Customer Complaint",
-        height=160,
+        height=180,
         placeholder=(
-            "Example: I was charged twice and still haven't "
-            "received my refund."
+            "Tell us what happened...\n\n"
+            "Example: My payment was deducted but my order "
+            "was cancelled. I have been waiting for my refund for 7 days."
         )
     )
 
+    st.caption(
+        "Please provide as much detail as possible so ResolveIQ "
+        "can understand your issue accurately."
+    )
 
     analyze_button = st.button(
-        "Analyze Complaint",
+        "🔍 Analyze Complaint",
         type="primary",
         width="stretch"
     )
 
 
+    # --------------------------------------------------------
+    # ANALYZE
+    # --------------------------------------------------------
+
     if analyze_button:
 
-        if not complaint_text.strip():
+        if not customer_name.strip():
 
             st.warning(
-                "Please enter a complaint before analyzing."
+                "Please enter your name."
+            )
+
+        elif not complaint_text.strip():
+
+            st.warning(
+                "Please describe your complaint before analyzing."
+            )
+
+        elif len(complaint_text.strip()) < 10:
+
+            st.warning(
+                "Please provide a little more detail about your problem."
             )
 
         else:
 
+            complaint_id = generate_complaint_id()
+            customer_id = generate_customer_id()
+
             payload = {
-                "complaint_id": complaint_id.strip(),
-                "customer_id": customer_id.strip(),
+                "complaint_id": complaint_id,
+                "customer_id": customer_id,
                 "complaint_text": complaint_text.strip()
             }
 
+            # Send optional name as an extra field only if backend accepts it.
+            # The main API request remains compatible with the current backend.
 
             try:
 
                 with st.spinner(
-                    "ResolveIQ is analyzing the complaint..."
+                    "ResolveIQ is understanding your complaint..."
                 ):
 
                     response = requests.post(
@@ -538,7 +804,6 @@ with tab_analyze:
                         json=payload,
                         timeout=180
                     )
-
 
                 if response.status_code == 200:
 
@@ -549,15 +814,34 @@ with tab_analyze:
                         {}
                     )
 
+                    # Keep generated IDs for display
+                    analysis["generated_complaint_id"] = complaint_id
+                    analysis["generated_customer_id"] = customer_id
+                    analysis["customer_name"] = customer_name.strip()
+
+                    st.session_state.last_result = analysis
 
                     st.success(
-                        "Complaint analyzed and saved successfully."
+                        "Your complaint has been analyzed successfully."
+                    )
+
+                    st.markdown(
+                        f"""
+                        <div class="complaint-id-box">
+                            <b>Complaint ID:</b> {html.escape(complaint_id)}
+                            <br>
+                            <span style="font-size:13px;">
+                                Keep this ID for future reference.
+                            </span>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
                     )
 
 
-                    # ------------------------------------------------
-                    # AI ANALYSIS
-                    # ------------------------------------------------
+                    # ============================================
+                    # SIMPLE CUSTOMER SUMMARY
+                    # ============================================
 
                     st.markdown(
                         '<div class="card">',
@@ -565,13 +849,66 @@ with tab_analyze:
                     )
 
                     st.markdown(
-                        '<div class="card-title">AI Analysis</div>',
+                        '<div class="card-title">'
+                        'Your Complaint Summary'
+                        '</div>',
+                        unsafe_allow_html=True
+                    )
+
+                    summary_col1, summary_col2, summary_col3 = st.columns(3)
+
+                    with summary_col1:
+
+                        show_metric(
+                            "Issue",
+                            safe_text(
+                                analysis.get("category")
+                            )
+                        )
+
+                    with summary_col2:
+
+                        show_metric(
+                            "Urgency",
+                            safe_text(
+                                analysis.get("urgency")
+                            )
+                        )
+
+                    with summary_col3:
+
+                        show_metric(
+                            "Assigned Team",
+                            safe_text(
+                                analysis.get(
+                                    "recommended_department"
+                                )
+                            )
+                        )
+
+                    st.markdown(
+                        "</div>",
                         unsafe_allow_html=True
                     )
 
 
-                    r1, r2, r3, r4 = st.columns(4)
+                    # ============================================
+                    # AI ANALYSIS
+                    # ============================================
 
+                    st.markdown(
+                        '<div class="card">',
+                        unsafe_allow_html=True
+                    )
+
+                    st.markdown(
+                        '<div class="card-title">'
+                        'AI Analysis'
+                        '</div>',
+                        unsafe_allow_html=True
+                    )
+
+                    r1, r2, r3, r4 = st.columns(4)
 
                     with r1:
 
@@ -582,7 +919,6 @@ with tab_analyze:
                             )
                         )
 
-
                     with r2:
 
                         show_metric(
@@ -591,7 +927,6 @@ with tab_analyze:
                                 analysis.get("sentiment")
                             )
                         )
-
 
                     with r3:
 
@@ -602,7 +937,6 @@ with tab_analyze:
                             )
                         )
 
-
                     with r4:
 
                         show_metric(
@@ -612,9 +946,7 @@ with tab_analyze:
                             )
                         )
 
-
                     r5, r6, r7, r8 = st.columns(4)
-
 
                     with r5:
 
@@ -625,7 +957,6 @@ with tab_analyze:
                             )
                         )
 
-
                     with r6:
 
                         show_metric(
@@ -634,7 +965,6 @@ with tab_analyze:
                                 analysis.get("intent")
                             )
                         )
-
 
                     with r7:
 
@@ -646,7 +976,6 @@ with tab_analyze:
                                 )
                             )
                         )
-
 
                     with r8:
 
@@ -661,22 +990,20 @@ with tab_analyze:
                             anomaly
                         )
 
-
                     st.markdown(
                         "</div>",
                         unsafe_allow_html=True
                     )
 
 
-                    # ------------------------------------------------
-                    # ENTITIES
-                    # ------------------------------------------------
+                    # ============================================
+                    # EXTRACTED INFORMATION
+                    # ============================================
 
                     entities = analysis.get(
                         "entities",
                         {}
                     )
-
 
                     actual_entities = {}
 
@@ -693,7 +1020,6 @@ with tab_analyze:
 
                                 actual_entities[key] = value
 
-
                     if actual_entities:
 
                         st.markdown(
@@ -703,33 +1029,28 @@ with tab_analyze:
 
                         st.markdown(
                             '<div class="card-title">'
-                            'Extracted Information'
+                            'Information Detected'
                             '</div>',
                             unsafe_allow_html=True
                         )
 
-
                         entity_rows = []
-
 
                         for key, value in actual_entities.items():
 
                             entity_rows.append(
                                 {
-                                    "Entity": key.replace(
+                                    "Information": key.replace(
                                         "_",
                                         " "
                                     ).title(),
-
                                     "Value": value
                                 }
                             )
 
-
                         entity_df = pd.DataFrame(
                             entity_rows
                         )
-
 
                         st.dataframe(
                             entity_df,
@@ -737,26 +1058,17 @@ with tab_analyze:
                             hide_index=True
                         )
 
-
                         st.markdown(
                             "</div>",
                             unsafe_allow_html=True
                         )
 
-                    else:
 
-                        st.info(
-                            "No specific customer, order, payment, "
-                            "date or location details were detected."
-                        )
-
-
-                    # ------------------------------------------------
+                    # ============================================
                     # RESOLUTION + RESPONSE
-                    # ------------------------------------------------
+                    # ============================================
 
                     resolution_col, response_col = st.columns(2)
-
 
                     with resolution_col:
 
@@ -772,7 +1084,6 @@ with tab_analyze:
                             unsafe_allow_html=True
                         )
 
-
                         resolution = safe_text(
                             analysis.get(
                                 "recommended_resolution"
@@ -780,16 +1091,14 @@ with tab_analyze:
                             "No recommendation available."
                         )
 
-
                         st.markdown(
                             f"""
                             <div class="resolution-box">
-                                {resolution}
+                                {html.escape(resolution)}
                             </div>
                             """,
                             unsafe_allow_html=True
                         )
-
 
                         st.markdown(
                             '<div class="card-title" '
@@ -799,19 +1108,16 @@ with tab_analyze:
                             unsafe_allow_html=True
                         )
 
-
                         department = safe_text(
                             analysis.get(
                                 "recommended_department"
                             )
                         )
 
-
                         st.write(
                             f"**Recommended Department:** "
                             f"{department}"
                         )
-
 
                         st.markdown(
                             "</div>",
@@ -833,7 +1139,6 @@ with tab_analyze:
                             unsafe_allow_html=True
                         )
 
-
                         ai_response = safe_text(
                             analysis.get(
                                 "ai_response"
@@ -841,21 +1146,18 @@ with tab_analyze:
                             "No response generated."
                         )
 
-
                         st.markdown(
                             f"""
                             <div class="result-box">
-                                {ai_response}
+                                {html.escape(ai_response)}
                             </div>
                             """,
                             unsafe_allow_html=True
                         )
 
-
                         recurring = analysis.get(
                             "recurring_issue"
                         )
-
 
                         if recurring:
 
@@ -864,32 +1166,77 @@ with tab_analyze:
                                 f"{recurring}"
                             )
 
-
                         st.markdown(
                             "</div>",
                             unsafe_allow_html=True
                         )
 
-
                 else:
 
-                    st.error(
-                        f"API Error {response.status_code}"
-                    )
+                    # Customer-friendly error handling
+                    try:
 
-                    st.code(
-                        response.text
-                    )
+                        error_data = response.json()
+
+                        detail = str(
+                            error_data.get(
+                                "detail",
+                                ""
+                            )
+                        ).lower()
+
+                    except Exception:
+
+                        detail = ""
+
+                    if response.status_code == 409:
+
+                        st.warning(
+                            "We couldn't create this complaint right now. "
+                            "Please try again."
+                        )
+
+                    elif response.status_code == 422:
+
+                        st.warning(
+                            "Please check your complaint details "
+                            "and try again."
+                        )
+
+                    elif response.status_code >= 500:
+
+                        st.error(
+                            "ResolveIQ is temporarily unable to process "
+                            "your complaint. Please try again in a moment."
+                        )
+
+                    else:
+
+                        st.error(
+                            "We couldn't analyze your complaint. "
+                            "Please try again."
+                        )
 
 
-            except requests.RequestException as error:
+            except requests.Timeout:
 
                 st.error(
-                    "Could not connect to the ResolveIQ backend."
+                    "The analysis is taking longer than expected. "
+                    "Please try again."
                 )
 
-                st.caption(
-                    str(error)
+            except requests.RequestException:
+
+                st.error(
+                    "ResolveIQ could not connect to the analysis service. "
+                    "Please try again shortly."
+                )
+
+            except Exception:
+
+                st.error(
+                    "Something went wrong while analyzing your complaint. "
+                    "Please try again."
                 )
 
 
@@ -900,7 +1247,9 @@ with tab_analyze:
 with tab_complaints:
 
     st.markdown(
-        '<div class="page-title">Complaint Records</div>',
+        '<div class="page-title">'
+        'Complaint Records'
+        '</div>',
         unsafe_allow_html=True
     )
 
@@ -911,10 +1260,9 @@ with tab_complaints:
         unsafe_allow_html=True
     )
 
-
     complaints = fetch_complaints()
-    df = pd.DataFrame(complaints)
 
+    df = pd.DataFrame(complaints)
 
     if not df.empty:
 
@@ -926,14 +1274,11 @@ with tab_complaints:
             )
         )
 
-
         filtered_df = df.copy()
-
 
         if search.strip():
 
             search_value = search.strip()
-
 
             search_mask = (
                 filtered_df
@@ -949,16 +1294,13 @@ with tab_complaints:
                 .any(axis=1)
             )
 
-
             filtered_df = filtered_df[
                 search_mask
             ]
 
-
         st.write(
             f"**{len(filtered_df)}** complaint(s) found"
         )
-
 
         columns = [
             "complaint_id",
@@ -974,13 +1316,11 @@ with tab_complaints:
             "created_at"
         ]
 
-
         available_columns = [
             column
             for column in columns
             if column in filtered_df.columns
         ]
-
 
         if available_columns:
 
@@ -998,7 +1338,6 @@ with tab_complaints:
                 hide_index=True
             )
 
-
     else:
 
         st.info(
@@ -1013,7 +1352,9 @@ with tab_complaints:
 with tab_insights:
 
     st.markdown(
-        '<div class="page-title">Complaint Insights</div>',
+        '<div class="page-title">'
+        'Complaint Insights'
+        '</div>',
         unsafe_allow_html=True
     )
 
@@ -1024,10 +1365,9 @@ with tab_insights:
         unsafe_allow_html=True
     )
 
-
     complaints = fetch_complaints()
-    df = pd.DataFrame(complaints)
 
+    df = pd.DataFrame(complaints)
 
     if df.empty:
 
@@ -1036,10 +1376,6 @@ with tab_insights:
         )
 
     else:
-
-        # --------------------------------------------------------
-        # CATEGORY CHART
-        # --------------------------------------------------------
 
         if "category" in df.columns:
 
@@ -1051,33 +1387,25 @@ with tab_insights:
                 .reset_index()
             )
 
-
             category_data.columns = [
                 "Category",
                 "Count"
             ]
 
-
             fig_category = px.bar(
                 category_data,
                 x="Category",
                 y="Count",
-                title="Complaints by Category"
+                title="Complaints by Category",
+                template=PLOT_TEMPLATE
             )
-
 
             st.plotly_chart(
                 fig_category,
                 width="stretch"
             )
 
-
-        # --------------------------------------------------------
-        # SENTIMENT
-        # --------------------------------------------------------
-
         left_chart, right_chart = st.columns(2)
-
 
         with left_chart:
 
@@ -1091,30 +1419,23 @@ with tab_insights:
                     .reset_index()
                 )
 
-
                 sentiment_data.columns = [
                     "Sentiment",
                     "Count"
                 ]
 
-
                 fig_sentiment = px.pie(
                     sentiment_data,
                     names="Sentiment",
                     values="Count",
-                    title="Sentiment Distribution"
+                    title="Sentiment Distribution",
+                    template=PLOT_TEMPLATE
                 )
-
 
                 st.plotly_chart(
                     fig_sentiment,
                     width="stretch"
                 )
-
-
-        # --------------------------------------------------------
-        # PRIORITY
-        # --------------------------------------------------------
 
         with right_chart:
 
@@ -1128,30 +1449,23 @@ with tab_insights:
                     .reset_index()
                 )
 
-
                 priority_data.columns = [
                     "Priority",
                     "Count"
                 ]
 
-
                 fig_priority = px.bar(
                     priority_data,
                     x="Priority",
                     y="Count",
-                    title="Priority Distribution"
+                    title="Priority Distribution",
+                    template=PLOT_TEMPLATE
                 )
-
 
                 st.plotly_chart(
                     fig_priority,
                     width="stretch"
                 )
-
-
-        # --------------------------------------------------------
-        # DEPARTMENT
-        # --------------------------------------------------------
 
         if "recommended_department" in df.columns:
 
@@ -1163,20 +1477,18 @@ with tab_insights:
                 .reset_index()
             )
 
-
             department_data.columns = [
                 "Department",
                 "Count"
             ]
 
-
             fig_department = px.bar(
                 department_data,
                 x="Department",
                 y="Count",
-                title="Department Routing"
+                title="Department Routing",
+                template=PLOT_TEMPLATE
             )
-
 
             st.plotly_chart(
                 fig_department,
@@ -1196,3 +1508,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+

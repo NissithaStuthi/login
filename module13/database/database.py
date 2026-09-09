@@ -21,7 +21,6 @@ load_dotenv(ENV_PATH)
 # DATABASE SETTINGS
 # ============================================================
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
 DB_NAME = os.getenv("DB_NAME", "ccaa_db")
 DB_USER = os.getenv("DB_USER", "postgres")
@@ -32,7 +31,15 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 # DATABASE URL
 # ============================================================
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set. Check your .env file.")
 
 
 # ============================================================
