@@ -32,11 +32,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 # DATABASE URL
 # ============================================================
 
-DATABASE_URL = (
-    f"postgresql+psycopg2://"
-    f"{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 # ============================================================
